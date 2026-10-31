@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../core/theme/app_theme.dart';
 import '../widgets/custom_button.dart';
-
 import '../core/services/api_service.dart';
 import '../repositories/auth_repository.dart';
 
-/// RegisterScreen allows new candidates to create a JobFinder profile.
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -130,7 +128,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 16),
                 ],
 
-                // Full Name
                 const Text('Full Name *', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -146,7 +143,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Email
                 const Text('Email Address *', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -164,7 +160,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Password
                 const Text('Password *', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -187,7 +182,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Phone
                 const Text('Phone Number (Optional)', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -200,7 +194,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Location
                 const Text('Current City / Location (Optional)', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 TextFormField(
@@ -212,7 +205,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 28),
 
-                // Register button
                 CustomButton(
                   text: 'Create Account',
                   isLoading: _isLoading,
@@ -220,7 +212,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // Back to login
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

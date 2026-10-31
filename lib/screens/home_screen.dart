@@ -8,8 +8,6 @@ import '../widgets/job_card.dart';
 import '../widgets/loading_widget.dart';
 import '../widgets/error_widget.dart';
 
-/// HomeScreen is the central hub for the candidate.
-/// Displays greeting, quick shortcuts, and featured jobs loaded from FastAPI + PostgreSQL.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -32,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadFeaturedJobs();
   }
 
-  /// Fetches jobs from the backend API using JobRepository
   Future<void> _loadFeaturedJobs() async {
     setState(() {
       _isLoading = true;
@@ -56,12 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  /// Toggles saving or unsaving a job in the wishlist
   Future<void> _toggleSaveJob(JobModel job) async {
     final bool wasSaved = job.isSaved;
     final int targetJobId = job.id;
 
-    // Optimistically update local UI state with setState
     setState(() {
       _featuredJobs = _featuredJobs.map((j) {
         if (j.id == targetJobId) {
@@ -89,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }
     } catch (e) {
-      // Revert if API call fails
       if (!mounted) return;
       setState(() {
         _featuredJobs = _featuredJobs.map((j) {
@@ -165,7 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Welcome Header
               Container(
                 margin: const EdgeInsets.all(16),
                 padding: const EdgeInsets.all(20),
@@ -209,8 +202,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-
-              // Quick Category Shortcuts
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -247,10 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-
               const SizedBox(height: 24),
-
-              // Section Header: Featured Jobs
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -271,8 +259,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-
-              // Content based on state
               if (_isLoading)
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 40),
@@ -313,7 +299,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }),
-
               const SizedBox(height: 24),
             ],
           ),

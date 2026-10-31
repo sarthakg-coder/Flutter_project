@@ -2,19 +2,12 @@ import '../core/constants/api_constants.dart';
 import '../core/services/api_service.dart';
 import '../models/application_model.dart';
 
-/// ApplicationRepository handles job application lifecycle.
-///
-/// Demonstrates:
-/// - HTTP POST (apply for a job)
-/// - HTTP GET (fetch all submitted applications)
-/// - HTTP DELETE (withdraw an application)
 class ApplicationRepository {
   final ApiService _apiService;
 
   ApplicationRepository({ApiService? apiService})
       : _apiService = apiService ?? ApiService();
 
-  /// Submits an application for a specific job (HTTP POST).
   Future<ApplicationModel> applyForJob({
     required int jobId,
     String? coverLetter,
@@ -35,7 +28,6 @@ class ApplicationRepository {
     throw ApiException('Failed to parse application response.');
   }
 
-  /// Retrieves all applications submitted by current candidate (HTTP GET).
   Future<List<ApplicationModel>> getMyApplications() async {
     final response = await _apiService.get(
       ApiConstants.applications,
@@ -51,7 +43,6 @@ class ApplicationRepository {
     return [];
   }
 
-  /// Withdraws a submitted application (HTTP DELETE).
   Future<void> withdrawApplication(int applicationId) async {
     await _apiService.delete(
       ApiConstants.withdrawApplication(applicationId),

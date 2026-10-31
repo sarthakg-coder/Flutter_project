@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../core/theme/app_theme.dart';
 import '../widgets/custom_button.dart';
-
 import '../core/services/api_service.dart';
 import '../repositories/auth_repository.dart';
 
-/// LoginScreen handles user login with email and password validation.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -115,7 +113,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 16),
                   ],
 
-                  // Email Field
                   const Text(
                     'Email Address',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
@@ -140,7 +137,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  // Password Field
                   const Text(
                     'Password',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
@@ -174,7 +170,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 28),
 
-                  // Submit Button
                   CustomButton(
                     text: 'Log In',
                     isLoading: _isLoading,
@@ -182,7 +177,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Register Link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

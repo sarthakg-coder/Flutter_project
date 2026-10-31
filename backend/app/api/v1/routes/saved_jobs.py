@@ -16,9 +16,6 @@ def save_job(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """
-    HTTP POST: Adds a job to candidate's saved wishlist.
-    """
     job = db.query(Job).filter(Job.id == save_in.job_id).first()
     if not job:
         raise HTTPException(
@@ -44,9 +41,6 @@ def get_saved_jobs(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """
-    HTTP GET: Retrieves all jobs saved by the logged-in candidate.
-    """
     saved_list = (
         db.query(SavedJob)
         .options(joinedload(SavedJob.job))
@@ -62,9 +56,6 @@ def remove_saved_job(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """
-    HTTP DELETE: Removes a job from candidate's wishlist.
-    """
     saved = db.query(SavedJob).filter(
         SavedJob.user_id == current_user.id,
         SavedJob.job_id == job_id,

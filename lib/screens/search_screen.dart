@@ -9,7 +9,6 @@ import '../widgets/job_card.dart';
 import '../widgets/loading_widget.dart';
 import '../widgets/error_widget.dart';
 
-/// SearchScreen allows candidates to search jobs by keyword, title, company, or skill.
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 

@@ -11,11 +11,6 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 @router.post("/register", response_model=Token, status_code=status.HTTP_201_CREATED)
 def register(user_in: UserCreate, db: Session = Depends(get_db)):
-    """
-    Registers a new candidate account.
-    Hashes password securely with bcrypt and issues a JWT token.
-    """
-    # Check if email already registered
     existing_user = db.query(User).filter(User.email == user_in.email.lower()).first()
     if existing_user:
         raise HTTPException(
@@ -23,7 +18,6 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
             detail="An account with this email address already exists.",
         )
 
-    # Create new user record
     new_user = User(
         full_name=user_in.full_name.strip(),
         email=user_in.email.lower().strip(),
@@ -35,7 +29,6 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    # Issue JWT Token
     access_token = create_access_token(subject=new_user.id, email=new_user.email)
     return Token(
         access_token=access_token,
@@ -45,10 +38,6 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=Token)
 def login(login_data: LoginRequest, db: Session = Depends(get_db)):
-    """
-    Logs in with email and password.
-    Returns JWT token for subsequent authenticated requests.
-    """
     user = db.query(User).filter(User.email == login_data.email.lower().strip()).first()
     if not user or not verify_password(login_data.password, user.password_hash):
         raise HTTPException(
@@ -65,7 +54,4 @@ def login(login_data: LoginRequest, db: Session = Depends(get_db)):
 
 @router.get("/me", response_model=UserResponse)
 def get_current_user_profile(current_user: User = Depends(get_current_user)):
-    """
-    Fetches the currently authenticated user's profile.
-    """
     return current_user

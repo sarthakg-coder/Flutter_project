@@ -11,10 +11,6 @@ def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security_bearer),
     db: Session = Depends(get_db)
 ) -> User:
-    """
-    Validates the JWT token in Authorization: Bearer <token>
-    and retrieves the corresponding User from PostgreSQL.
-    """
     if not credentials:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -51,10 +47,6 @@ def get_current_user_optional(
     credentials: HTTPAuthorizationCredentials = Depends(security_bearer),
     db: Session = Depends(get_db)
 ) -> User | None:
-    """
-    Optional user dependency for public endpoints (like job listing)
-    where we want to know if the user saved the job without blocking guests.
-    """
     if not credentials:
         return None
     try:

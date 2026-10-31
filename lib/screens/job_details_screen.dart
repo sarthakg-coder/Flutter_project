@@ -9,8 +9,6 @@ import '../widgets/custom_button.dart';
 import '../widgets/error_widget.dart';
 import '../widgets/loading_widget.dart';
 
-/// JobDetailsScreen displays complete information about a specific job
-/// and allows the candidate to submit an application or bookmark the role.
 class JobDetailsScreen extends StatefulWidget {
   final int jobId;
 
@@ -238,7 +236,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Company & Title Header
             Row(
               children: [
                 Container(
@@ -287,7 +284,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             ),
             const SizedBox(height: 20),
 
-            // Key Info Cards
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -333,7 +329,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             ),
             const SizedBox(height: 24),
 
-            // Description
             const Text(
               'Job Description',
               style: TextStyle(
@@ -353,7 +348,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             ),
             const SizedBox(height: 24),
 
-            // Required Skills
             if (job.skillsList.isNotEmpty) ...[
               const Text(
                 'Required Skills',

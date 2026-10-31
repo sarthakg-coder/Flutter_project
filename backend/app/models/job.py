@@ -10,12 +10,11 @@ class Job(Base):
     title = Column(String(150), nullable=False, index=True)
     company_name = Column(String(120), nullable=False, index=True)
     location = Column(String(100), nullable=False)
-    job_type = Column(String(50), nullable=False, default="Full-time") # Full-time, Part-time, Remote, Internship
+    job_type = Column(String(50), nullable=False, default="Full-time")
     salary = Column(String(100), nullable=True)
     description = Column(Text, nullable=False)
-    required_skills = Column(String(255), nullable=True) # e.g. "Flutter, Dart, REST API"
+    required_skills = Column(String(255), nullable=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
-    # Relationships
     applications = relationship("Application", back_populates="job", cascade="all, delete-orphan")
     saved_by = relationship("SavedJob", back_populates="job", cascade="all, delete-orphan")

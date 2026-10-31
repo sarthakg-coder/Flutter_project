@@ -1,9 +1,3 @@
-/// UserModel represents the authenticated user's profile information.
-///
-/// Viva/Interview explanation:
-/// "Models in Dart convert raw JSON maps received from the REST API
-/// into strongly typed Dart objects using fromJson() factory constructor,
-/// preventing runtime type errors and null reference exceptions."
 class UserModel {
   final int id;
   final String fullName;
@@ -21,7 +15,6 @@ class UserModel {
     this.createdAt,
   });
 
-  /// Factory constructor to parse JSON from backend into UserModel.
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'] as int,
@@ -33,7 +26,6 @@ class UserModel {
     );
   }
 
-  /// Converts UserModel instance to a JSON Map for API updates (PUT requests).
   Map<String, dynamic> toJson() {
     return {
       'full_name': fullName,
@@ -42,7 +34,6 @@ class UserModel {
     };
   }
 
-  /// CopyWith helper to easily update fields in setState without mutation.
   UserModel copyWith({
     int? id,
     String? fullName,

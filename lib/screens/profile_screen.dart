@@ -7,7 +7,6 @@ import '../widgets/custom_button.dart';
 import '../widgets/error_widget.dart';
 import '../widgets/loading_widget.dart';
 
-/// ProfileScreen displays candidate account details fetched from PostgreSQL and logout action.
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -122,7 +121,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            // Avatar Header
             Center(
               child: Column(
                 children: [
@@ -160,7 +158,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 32),
 
-            // Profile Info List
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -187,7 +184,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 24),
 
-            // Edit Profile Button
             CustomButton(
               text: 'Edit Profile',
               isOutlined: true,
@@ -201,7 +197,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Logout Button
             CustomButton(
               text: 'Log Out',
               icon: Icons.logout_rounded,

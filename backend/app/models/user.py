@@ -14,6 +14,5 @@ class User(Base):
     location = Column(String(100), nullable=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
-    # Relationships
     applications = relationship("Application", back_populates="user", cascade="all, delete-orphan")
     saved_jobs = relationship("SavedJob", back_populates="user", cascade="all, delete-orphan")

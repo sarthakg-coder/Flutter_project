@@ -9,9 +9,6 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 @router.get("/me", response_model=UserResponse)
 def get_user_profile(current_user: User = Depends(get_current_user)):
-    """
-    HTTP GET: Retrieves current candidate's profile information.
-    """
     return current_user
 
 @router.put("/me", response_model=UserResponse)
@@ -20,10 +17,6 @@ def update_user_profile(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """
-    HTTP PUT: Updates current candidate's profile (name, phone, location).
-    Demonstrates HTTP PUT method communicating with PostgreSQL.
-    """
     if user_update.full_name is not None and user_update.full_name.strip():
         current_user.full_name = user_update.full_name.strip()
 

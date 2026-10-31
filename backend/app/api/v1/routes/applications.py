@@ -16,11 +16,6 @@ def apply_for_job(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """
-    HTTP POST: Candidate submits an application for a job.
-    Enforces uniqueness: Candidate cannot apply to the same job twice.
-    """
-    # 1. Verify job exists
     job = db.query(Job).filter(Job.id == app_in.job_id).first()
     if not job:
         raise HTTPException(
@@ -28,7 +23,6 @@ def apply_for_job(
             detail="The job you are applying for does not exist.",
         )
 
-    # 2. Check for duplicate application
     existing_app = db.query(Application).filter(
         Application.user_id == current_user.id,
         Application.job_id == app_in.job_id,
@@ -39,7 +33,6 @@ def apply_for_job(
             detail="You have already applied for this job.",
         )
 
-    # 3. Create application
     new_app = Application(
         user_id=current_user.id,
         job_id=app_in.job_id,
@@ -57,10 +50,6 @@ def get_my_applications(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """
-    HTTP GET: Retrieves all applications submitted by the logged-in candidate.
-    Includes the associated job details.
-    """
     applications = (
         db.query(Application)
         .options(joinedload(Application.job))
@@ -76,9 +65,6 @@ def withdraw_application(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """
-    HTTP DELETE: Candidate withdraws their submitted application.
-    """
     app_record = db.query(Application).filter(
         Application.id == application_id,
         Application.user_id == current_user.id,

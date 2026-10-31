@@ -18,10 +18,6 @@ def get_jobs(
     db: Session = Depends(get_db),
     current_user: Optional[User] = Depends(get_current_user_optional),
 ):
-    """
-    Fetches job listings with optional search and job type filters.
-    If authenticated, indicates whether each job is in user's saved wishlist.
-    """
     query = db.query(Job)
 
     if search and search.strip():
@@ -40,7 +36,6 @@ def get_jobs(
 
     jobs = query.order_by(Job.id.desc()).all()
 
-    # Determine which jobs the current user has saved
     saved_job_ids = set()
     if current_user:
         saved_records = db.query(SavedJob.job_id).filter(SavedJob.user_id == current_user.id).all()
@@ -60,9 +55,6 @@ def get_job_by_id(
     db: Session = Depends(get_db),
     current_user: Optional[User] = Depends(get_current_user_optional),
 ):
-    """
-    Fetches details of a specific job by its unique ID.
-    """
     job = db.query(Job).filter(Job.id == job_id).first()
     if not job:
         raise HTTPException(

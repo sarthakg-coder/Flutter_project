@@ -11,11 +11,9 @@ class SavedJob(Base):
     job_id = Column(Integer, ForeignKey("jobs.id", ondelete="CASCADE"), nullable=False)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
-    # Prevent saving the same job multiple times
     __table_args__ = (
         UniqueConstraint("user_id", "job_id", name="uq_user_job_saved"),
     )
 
-    # Relationships
     user = relationship("User", back_populates="saved_jobs")
     job = relationship("Job", back_populates="saved_by")

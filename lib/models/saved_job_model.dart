@@ -1,10 +1,5 @@
 import 'job_model.dart';
 
-/// SavedJobModel represents a job bookmarked by the user to their wishlist.
-///
-/// Viva/Interview explanation:
-/// "It links the user to a job ID and allows candidate quick access
-/// to jobs they plan to apply for later."
 class SavedJobModel {
   final int id;
   final int userId;
@@ -20,7 +15,6 @@ class SavedJobModel {
     this.job,
   });
 
-  /// Factory constructor to parse JSON response from GET /api/v1/saved-jobs
   factory SavedJobModel.fromJson(Map<String, dynamic> json) {
     return SavedJobModel(
       id: json['id'] as int,
@@ -31,7 +25,6 @@ class SavedJobModel {
     );
   }
 
-  /// Converts SavedJobModel to JSON Map
   Map<String, dynamic> toJson() {
     return {
       'job_id': jobId,

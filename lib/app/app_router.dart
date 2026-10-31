@@ -14,11 +14,6 @@ import '../models/user_model.dart';
 import '../screens/profile_screen.dart';
 import '../screens/edit_profile_screen.dart';
 
-/// AppRouter centralizes all navigation using GoRouter.
-///
-/// In an interview or viva, you can explain:
-/// "GoRouter provides declarative routing, URL parsing, deep linking,
-/// and guards that prevent unauthenticated users from accessing protected screens."
 class AppRouter {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -91,8 +86,6 @@ class AppRouter {
         ],
       ),
     ],
-
-    // Route guard: Protect private screens if user does not have a token
     redirect: (context, state) async {
       final isAuthRoute = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register' ||

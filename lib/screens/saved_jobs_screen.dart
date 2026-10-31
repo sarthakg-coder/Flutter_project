@@ -7,7 +7,6 @@ import '../widgets/error_widget.dart';
 import '../widgets/job_card.dart';
 import '../widgets/loading_widget.dart';
 
-/// SavedJobsScreen displays the user's bookmarked/wishlisted jobs fetched from PostgreSQL.
 class SavedJobsScreen extends StatefulWidget {
   const SavedJobsScreen({super.key});
 
@@ -54,7 +53,6 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
   Future<void> _removeJob(SavedJobModel item) async {
     final int targetJobId = item.jobId;
 
-    // Optimistic removal from UI list
     setState(() {
       _savedJobs.removeWhere((s) => s.id == item.id);
     });
@@ -70,7 +68,6 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
         ),
       );
     } catch (e) {
-      // Revert if API failed
       if (!mounted) return;
       _fetchSavedJobs();
       ScaffoldMessenger.of(context).showSnackBar(

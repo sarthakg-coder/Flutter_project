@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/theme/app_theme.dart';
 
-/// Reusable full-width button with support for loading indicator and disable state.
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;

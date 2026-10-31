@@ -1,15 +1,9 @@
-/// JobModel represents an available job listing in the JobFinder app.
-///
-/// Viva/Interview explanation:
-/// "Each field corresponds to a column in our PostgreSQL `jobs` table.
-/// We also include helper getters like `formattedSalary` and `skillsList`
-/// to make rendering in UI widgets clean and readable."
 class JobModel {
   final int id;
   final String title;
   final String companyName;
   final String location;
-  final String jobType; // e.g. 'Full-time', 'Part-time', 'Remote', 'Internship'
+  final String jobType;
   final String? salary;
   final String description;
   final String? requiredSkills;
@@ -29,7 +23,6 @@ class JobModel {
     this.isSaved = false,
   });
 
-  /// Factory constructor to parse JSON response from GET /api/v1/jobs
   factory JobModel.fromJson(Map<String, dynamic> json) {
     return JobModel(
       id: json['id'] as int,
@@ -45,7 +38,6 @@ class JobModel {
     );
   }
 
-  /// Converts JobModel to JSON Map if sending to server
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -59,7 +51,6 @@ class JobModel {
     };
   }
 
-  /// Parses comma-separated skills into an easy-to-render List of Strings for chips.
   List<String> get skillsList {
     if (requiredSkills == null || requiredSkills!.trim().isEmpty) {
       return [];
@@ -71,7 +62,6 @@ class JobModel {
         .toList();
   }
 
-  /// Returns a clean copy of JobModel with updated values (e.g. toggled isSaved).
   JobModel copyWith({
     int? id,
     String? title,

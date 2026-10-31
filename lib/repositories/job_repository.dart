@@ -2,19 +2,12 @@ import '../core/constants/api_constants.dart';
 import '../core/services/api_service.dart';
 import '../models/job_model.dart';
 
-/// JobRepository handles fetching job listings and single job details.
-///
-/// Viva/Interview explanation:
-/// "The repository interacts with ApiConstants and ApiService.
-/// It converts raw JSON lists and maps into strongly-typed JobModel objects
-/// before returning them to our StatefulWidgets."
 class JobRepository {
   final ApiService _apiService;
 
   JobRepository({ApiService? apiService})
       : _apiService = apiService ?? ApiService();
 
-  /// Fetches job listings with optional search query and job type filter (HTTP GET).
   Future<List<JobModel>> getJobs({
     String? search,
     String? jobType,
@@ -46,7 +39,6 @@ class JobRepository {
     return [];
   }
 
-  /// Fetches complete details of a specific job by ID (HTTP GET).
   Future<JobModel> getJobById(int id) async {
     final response = await _apiService.get(
       ApiConstants.jobDetails(id),

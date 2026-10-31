@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/theme/app_theme.dart';
 
-/// Reusable Card displaying job summary information.
 class JobCard extends StatelessWidget {
   final int id;
   final String title;
@@ -37,7 +36,6 @@ class JobCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Company Icon + Title + Bookmark Button
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -97,8 +95,6 @@ class JobCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-
-              // Badges for Location and Job Type
               Wrap(
                 spacing: 8,
                 runSpacing: 6,
@@ -107,8 +103,6 @@ class JobCard extends StatelessWidget {
                   _buildBadge(Icons.access_time_outlined, jobType),
                 ],
               ),
-
-              // Salary if present
               if (salary != null && salary!.isNotEmpty) ...[
                 const SizedBox(height: 10),
                 Text(

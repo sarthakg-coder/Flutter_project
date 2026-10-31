@@ -7,7 +7,6 @@ from .models.job import Job
 from .api.v1.routes import auth, jobs, users, applications, saved_jobs
 
 def seed_sample_jobs():
-    """Seeds initial sample job postings if database is empty."""
     db = SessionLocal()
     try:
         if db.query(Job).count() == 0:
@@ -75,11 +74,9 @@ def seed_sample_jobs():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: Create tables in PostgreSQL and seed sample jobs
     Base.metadata.create_all(bind=engine)
     seed_sample_jobs()
     yield
-    # Shutdown logic if any
 
 app = FastAPI(
     title="JobFinder API",
@@ -88,7 +85,6 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Configure CORS so Flutter Web, Desktop, and Mobile emulators can access the API
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -97,7 +93,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register API v1 routes
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(jobs.router, prefix="/api/v1")
 app.include_router(users.router, prefix="/api/v1")

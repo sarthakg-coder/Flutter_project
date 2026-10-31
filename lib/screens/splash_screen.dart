@@ -3,8 +3,6 @@ import 'package:go_router/go_router.dart';
 import '../core/services/api_service.dart';
 import '../core/theme/app_theme.dart';
 
-/// SplashScreen checks whether the user is already logged in (has a valid JWT token)
-/// and directs them to either the HomeScreen or LoginScreen.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -20,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkAuthStatus() async {
-    // Artificial delay for smooth splash presentation
     await Future.delayed(const Duration(seconds: 2));
 
     if (!mounted) return;

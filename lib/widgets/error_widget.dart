@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/theme/app_theme.dart';
 
-/// Reusable error widget showing an error icon, error message, and a Retry button.
 class AppErrorWidget extends StatelessWidget {
   final String message;
   final VoidCallback? onRetry;
@@ -65,5 +64,4 @@ class AppErrorWidget extends StatelessWidget {
   }
 }
 
-/// Alias so either AppErrorWidget or ErrorRetryWidget can be used consistently.
 typedef ErrorRetryWidget = AppErrorWidget;

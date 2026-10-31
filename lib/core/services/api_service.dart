@@ -5,7 +5,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import '../constants/api_constants.dart';
 
-/// Custom exception class to represent API and network errors clearly.
 class ApiException implements Exception {
   final String message;
   final int? statusCode;
@@ -16,15 +15,7 @@ class ApiException implements Exception {
   String toString() => message;
 }
 
-/// ApiService is a centralized HTTP client for making API requests.
-///
-/// Features:
-/// 1. Uses the official Dart `http` package only.
-/// 2. Implements all 4 HTTP methods: GET, POST, PUT, DELETE.
-/// 3. Automatically attaches JWT tokens to authenticated requests.
-/// 4. Handles network timeouts, bad responses, and JSON decoding safely.
 class ApiService {
-  // Singleton pattern so the entire app shares one instance
   static final ApiService _instance = ApiService._internal();
   factory ApiService() => _instance;
   ApiService._internal();
@@ -32,16 +23,10 @@ class ApiService {
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   static const String _tokenKey = 'jwt_access_token';
 
-  // -------------------------------------------------------------
-  // TOKEN MANAGEMENT (Secure Storage)
-  // -------------------------------------------------------------
-
-  /// Saves the JWT access token securely on the device.
   Future<void> saveToken(String token) async {
     await _secureStorage.write(key: _tokenKey, value: token);
   }
 
-  /// Retrieves the saved JWT token. Returns null if not logged in.
   Future<String?> getToken() async {
     try {
       return await _secureStorage.read(key: _tokenKey);
@@ -50,22 +35,15 @@ class ApiService {
     }
   }
 
-  /// Clears the saved JWT token on logout.
   Future<void> clearToken() async {
     await _secureStorage.delete(key: _tokenKey);
   }
 
-  /// Checks if the user is currently logged in.
   Future<bool> hasToken() async {
     final token = await getToken();
     return token != null && token.isNotEmpty;
   }
 
-  // -------------------------------------------------------------
-  // HEADERS HELPER
-  // -------------------------------------------------------------
-
-  /// Constructs common headers, automatically adding the Bearer token when required.
   Future<Map<String, String>> _buildHeaders({bool requiresAuth = true}) async {
     final headers = <String, String>{
       'Content-Type': 'application/json',
@@ -82,11 +60,6 @@ class ApiService {
     return headers;
   }
 
-  // -------------------------------------------------------------
-  // HTTP METHODS: GET, POST, PUT, DELETE
-  // -------------------------------------------------------------
-
-  /// Performs a GET request.
   Future<dynamic> get(
     String endpoint, {
     Map<String, String>? queryParameters,
@@ -111,7 +84,6 @@ class ApiService {
     }
   }
 
-  /// Performs a POST request with JSON body.
   Future<dynamic> post(
     String endpoint, {
     Map<String, dynamic>? body,
@@ -140,7 +112,6 @@ class ApiService {
     }
   }
 
-  /// Performs a PUT request with JSON body.
   Future<dynamic> put(
     String endpoint, {
     Map<String, dynamic>? body,
@@ -169,7 +140,6 @@ class ApiService {
     }
   }
 
-  /// Performs a DELETE request.
   Future<dynamic> delete(
     String endpoint, {
     bool requiresAuth = true,
@@ -193,11 +163,6 @@ class ApiService {
     }
   }
 
-  // -------------------------------------------------------------
-  // HELPER METHODS
-  // -------------------------------------------------------------
-
-  /// Combines the base URL, endpoint path, and query parameters.
   Uri _buildUri(String endpoint, [Map<String, String>? queryParameters]) {
     final fullUrl = '${ApiConstants.baseUrl}$endpoint';
     final parsed = Uri.parse(fullUrl);
@@ -207,7 +172,6 @@ class ApiService {
     return parsed;
   }
 
-  /// Validates HTTP status code and decodes JSON response.
   dynamic _handleResponse(http.Response response) {
     dynamic decodedBody;
     if (response.body.isNotEmpty) {
@@ -222,14 +186,12 @@ class ApiService {
       return decodedBody;
     }
 
-    // Extract backend error message if available (FastAPI usually returns {"detail": "..."})
     String errorMessage = 'Request failed with status code ${response.statusCode}';
     if (decodedBody is Map && decodedBody.containsKey('detail')) {
       final detail = decodedBody['detail'];
       if (detail is String) {
         errorMessage = detail;
       } else if (detail is List && detail.isNotEmpty) {
-        // Pydantic validation error list
         final first = detail.first;
         if (first is Map && first.containsKey('msg')) {
           errorMessage = first['msg'].toString();

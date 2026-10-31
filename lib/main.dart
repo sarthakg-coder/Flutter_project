@@ -7,11 +7,6 @@ void main() {
   runApp(const JobFinderApp());
 }
 
-/// JobFinderApp is the root widget of our mobile application.
-/// It configures:
-/// 1. GoRouter routing via MaterialApp.router
-/// 2. Global light theme from AppTheme
-/// 3. App title and debugging banners
 class JobFinderApp extends StatelessWidget {
   const JobFinderApp({super.key});
 

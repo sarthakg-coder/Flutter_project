@@ -6,7 +6,6 @@ import '../models/user_model.dart';
 import '../repositories/auth_repository.dart';
 import '../widgets/custom_button.dart';
 
-/// EditProfileScreen allows candidates to update their name, phone, and location using HTTP PUT.
 class EditProfileScreen extends StatefulWidget {
   final UserModel? initialUser;
 
@@ -51,7 +50,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     });
 
     try {
-      // Demonstrates HTTP PUT updating the candidate in PostgreSQL
       await _authRepository.updateProfile(
         fullName: _fullNameController.text,
         phone: _phoneController.text.isNotEmpty ? _phoneController.text : null,
@@ -69,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       );
 
-      context.pop(true); // Return success to parent screen
+      context.pop(true);
     } on ApiException catch (e) {
       if (!mounted) return;
       setState(() {

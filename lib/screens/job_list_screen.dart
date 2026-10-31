@@ -8,7 +8,6 @@ import '../widgets/job_card.dart';
 import '../widgets/loading_widget.dart';
 import '../widgets/error_widget.dart';
 
-/// JobListScreen displays all available jobs with filter chips and live backend data.
 class JobListScreen extends StatefulWidget {
   const JobListScreen({super.key});
 
@@ -120,7 +119,6 @@ class _JobListScreenState extends State<JobListScreen> {
       ),
       body: Column(
         children: [
-          // Filter Chips Horizontal List
           Container(
             height: 54,
             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -151,8 +149,6 @@ class _JobListScreenState extends State<JobListScreen> {
               },
             ),
           ),
-
-          // Job list content
           Expanded(
             child: RefreshIndicator(
               onRefresh: _fetchJobs,

@@ -1,11 +1,5 @@
 import 'job_model.dart';
 
-/// ApplicationModel represents a job application submitted by the candidate.
-///
-/// Viva/Interview explanation:
-/// "It links a candidate to a job, tracks the application status
-/// ('Applied', 'Reviewed', 'Interviewing', 'Accepted', 'Rejected'),
-/// and embeds the associated JobModel for easy display in the UI."
 class ApplicationModel {
   final int id;
   final int userId;
@@ -25,7 +19,6 @@ class ApplicationModel {
     this.job,
   });
 
-  /// Factory constructor to parse JSON response from GET /api/v1/applications
   factory ApplicationModel.fromJson(Map<String, dynamic> json) {
     return ApplicationModel(
       id: json['id'] as int,
@@ -38,7 +31,6 @@ class ApplicationModel {
     );
   }
 
-  /// Converts ApplicationModel to JSON Map
   Map<String, dynamic> toJson() {
     return {
       'job_id': jobId,

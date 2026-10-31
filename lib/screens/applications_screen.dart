@@ -6,7 +6,6 @@ import '../repositories/application_repository.dart';
 import '../widgets/error_widget.dart';
 import '../widgets/loading_widget.dart';
 
-/// ApplicationsScreen lists all jobs the candidate has submitted applications for in PostgreSQL.
 class ApplicationsScreen extends StatefulWidget {
   const ApplicationsScreen({super.key});
 

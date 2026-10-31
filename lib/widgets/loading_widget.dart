@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/theme/app_theme.dart';
 
-/// Reusable loading indicator with an optional friendly message.
 class LoadingWidget extends StatelessWidget {
   final String? message;
 
